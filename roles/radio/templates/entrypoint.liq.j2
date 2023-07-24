@@ -36,4 +36,4 @@ flv = %ffmpeg(
     %audio.copy,
     %video.copy,
 )
-output.youtube.live.rtmp(encoder=flv, fallible=true, key="{{ YT_TOKEN }}", stream)
+output.rtmp(encoder=flv, fallible=true, "{{ YT_TOKEN }}", stream)
