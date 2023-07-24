@@ -8,6 +8,7 @@ video.frame.width.set(1920)
 source_audio = input.http("{{ RADIO_URL }}")
 source_video = single("/data/{{ VIDEO_SOURCE }}")
 source_mux = mux_video(video=source_video,source_audio)
+set("input", sourse_mix)
 
 {% if track_output == "true" %}
 srightnow = ref("")
@@ -36,4 +37,7 @@ flv = %ffmpeg(
     %audio.copy,
     %video.copy,
 )
+set("output.ffmpeg", flv)
+set("output.rtmp", "{{ YT_TOKEN }}")
+output.rtmp.encoder("ffmpeg")
 output.rtmp(encoder=flv, fallible=true, "{{ YT_TOKEN }}", stream)
